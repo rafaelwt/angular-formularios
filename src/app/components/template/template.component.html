@@ -1,0 +1,36 @@
+<h3> Formularios template</h3>
+<form  (submit)="guardar(forma)" #forma="ngForm" >
+    <div class="form-group">
+      <label >Nombre </label>
+      <input type="text" [ngClass]="{'form-control': true, 'is-invalid': !nombre.valid}" name="nombre"  ngModel [(ngModel)]="usuario.nombre" #nombre="ngModel" placeholder="Nombre" required minlength="5">
+      <div class="invalid-feedback">
+       <span *ngIf="nombre?.errors?.required">Este Campo es requerido</span>
+       <span  *ngIf="nombre?.errors?.minlength">Necesita al menos 5  caracteres</span>
+
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label >Apellido</label>
+      <input type="text" [ngClass]="{'form-control': true, 'is-invalid': !apellido.valid}"  name="apellido" ngModel [(ngModel)]="usuario.apellido"  #apellido="ngModel"  placeholder="Apellido" required >
+      <div class="invalid-feedback">
+        <span *ngIf="apellido?.errors?.required">Este Campo es requerido</span>
+       </div>
+
+    </div>
+    <div class="form-group">
+        <label >Correo</label>
+        <input type="email" [ngClass]="{'form-control': true, 'is-invalid': !correo.valid}"  name="correo"  ngModel [(ngModel)]="usuario.correo"  placeholder="Correo Electronico"
+        pattern="[a-z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-z]{2,3}$" required  #correo="ngModel"
+        >
+        <div class="invalid-feedback">
+          <span *ngIf="correo?.errors?.required">Este Campo es requerido</span>
+          <span  *ngIf="correo?.errors?.pattern">El campo no tiene formato de correo</span>
+
+         </div>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary">Guardar</button>
+
+  </form>
+
