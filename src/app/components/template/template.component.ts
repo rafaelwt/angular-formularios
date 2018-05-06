@@ -10,11 +10,28 @@ export class TemplateComponent implements OnInit {
   usuario: Usuario = new Usuario();
   constructor() {
     this.usuario = {
-      nombre: 'Rafael',
-      apellido: 'Wayar',
-      correo: 'rwt@gmail.com'
+      nombre: '',
+      apellido: '',
+      correo: '',
+      pais: '',
+      sexo: 3,
+      acepta: false
     };
   }
+
+  paises = [{
+    codigo: 'CRI',
+    nombre: 'Costa Rica'
+  }, {
+    codigo: 'BO',
+    nombre: 'Bolivia'
+  }, {
+    codigo: 'ES',
+    nombre: 'España'
+  }
+];
+
+  sexos = [{codigo: 1, nombre: 'Hombre'}, { codigo: 2, nombre: 'Mujer'}, { codigo: 3, nombre: 'Sin definir'}];
 
   ngOnInit() {
   }
@@ -29,4 +46,7 @@ export class Usuario {
   nombre: string;
   apellido: string;
   correo: string;
+  pais: string;
+  sexo: number;
+  acepta: boolean;
 }

@@ -2,7 +2,7 @@
 <form  (submit)="guardar(forma)" #forma="ngForm" >
     <div class="form-group">
       <label >Nombre </label>
-      <input type="text" [ngClass]="{'form-control': true, 'is-invalid': !nombre.valid}" name="nombre"  ngModel [(ngModel)]="usuario.nombre" #nombre="ngModel" placeholder="Nombre" required minlength="5">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': (nombre?.errors?.required || nombre?.errors?.minlength) && nombre?.touched }" name="nombre"  ngModel [(ngModel)]="usuario.nombre" #nombre="ngModel" placeholder="Nombre" required minlength="5">
       <div class="invalid-feedback">
        <span *ngIf="nombre?.errors?.required">Este Campo es requerido</span>
        <span  *ngIf="nombre?.errors?.minlength">Necesita al menos 5  caracteres</span>
@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
       <label >Apellido</label>
-      <input type="text" [ngClass]="{'form-control': true, 'is-invalid': !apellido.valid}"  name="apellido" ngModel [(ngModel)]="usuario.apellido"  #apellido="ngModel"  placeholder="Apellido" required >
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': (apellido?.errors?.required) || apellido?.touched}"  name="apellido" ngModel [(ngModel)]="usuario.apellido"  #apellido="ngModel"  placeholder="Apellido" required >
       <div class="invalid-feedback">
         <span *ngIf="apellido?.errors?.required">Este Campo es requerido</span>
        </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         <label >Correo</label>
-        <input type="email" [ngClass]="{'form-control': true, 'is-invalid': !correo.valid}"  name="correo"  ngModel [(ngModel)]="usuario.correo"  placeholder="Correo Electronico"
+        <input type="email" [ngClass]="{'form-control': true, 'is-invalid': !correo.valid || correo?.touched}"  name="correo"  ngModel [(ngModel)]="usuario.correo"  placeholder="Correo Electronico"
         pattern="[a-z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-z]{2,3}$" required  #correo="ngModel"
         >
         <div class="invalid-feedback">
@@ -30,7 +30,49 @@
          </div>
       </div>
 
-      <button type="submit" class="btn btn-outline-primary">Guardar</button>
+      <div class="form-group">
+        <label >Pais</label>
+        <select [(ngModel)]="usuario.pais" class="custom-select" name="pais" #pais="ngModel">
+          <option value="" selected>Seleccione un pais</option>
+          <option *ngFor="let pais of paises" [value]="pais.codigo" > {{ pais.nombre }}</option>
+        </select>
+        <div class="invalid-feedback">
+          <span *ngIf="apellido?.errors?.required">Este Campo es requerido</span>
+         </div>
+
+      </div>
+
+        <fieldset class="form-group">
+            <div *ngFor="let sex of sexos" class="custom-control custom-radio custom-control-inline">
+                <input [id]="sex.codigo"  class="custom-control-input"  [(ngModel)]="usuario.sexo" name="sexo" #sexo="ngModel" type="radio" name="sexo"  [value]="sex.codigo" >
+                <label class="custom-control-label" [for]="sex.codigo" > {{ sex.nombre }}</label>
+              </div>
+        </fieldset>
+
+
+
+        <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-label col-sm-2 pt-0">Terminos y condiciones</legend>
+              <div class="col-sm-10">
+                <div  class="form-check">
+                  <input class="form-check-input" [(ngModel)]="usuario.acepta" name="acepta" #acepta="ngModel" type="checkbox" name="acepta"  checked required>
+                  <label class="form-check-label" for="gridRadios1">
+                   Acepta las condiciones
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </fieldset>
+
+     <button type="submit" class="btn btn-outline-primary" [disabled]="!forma.valid" >
+<!--         <button type="submit" class="btn btn-outline-primary"> -->
+        Guardar
+      </button>
+
+      <hr>
+      <pre> {{usuario | json}}</pre>
 
   </form>
 

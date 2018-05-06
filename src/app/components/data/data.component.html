@@ -1,3 +1,34 @@
-<p>
-  data works!
-</p>
+<h3> Formularios DATA</h3>
+<form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
+    <div formGroupName="nombrecompleto">
+    <div class="form-group">
+      <label >Nombre</label>
+     <!--  [ngClass]="{ 'is-invalid': (!forma.get('nombre').valid && forma.get('nombre').touched) , 'is-valid': forma.get('nombre').valid}"   cuando no esta en un formGroupName-->
+      <input type="text" class="form-control"  placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': (!forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched) , 'is-valid': forma.controls['nombrecompleto'].controls['nombre'].valid}">
+      <div class="invalid-feedback">
+     <!--       <span *ngIf="forma.controls['nombre'].errors?.required">Este Campo es requerido</span> -->
+          <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required">Este Campo es requerido</span>
+          <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength">Necesita al menos 5  caracteres</span>
+         </div>
+    </div>
+    <div class="form-group">
+        <label >Apellido</label>
+        <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
+      </div>
+    </div>
+    <div class="form-group">
+        <label >Correo </label>
+        <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Correo Electronico" formControlName="correo">
+      </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!forma.valid" >Guardar</button>
+
+
+  </form>
+  <hr>
+  <pre>
+      {{ forma.valid | json}}
+
+  </pre>
+
+
+
