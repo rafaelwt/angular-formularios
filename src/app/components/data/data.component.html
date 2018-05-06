@@ -20,6 +20,28 @@
         <label >Correo </label>
         <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Correo Electronico" formControlName="correo">
       </div>
+      <div class="form-group" formArrayName="pasatiempos">
+        <label >Pasatiempos</label>
+        <input *ngFor="let pasatiempo of forma.controls['pasatiempos'].controls; let i = index" type="text" class="form-control" placeholder="Pasatiempos" [formControlName]="i">
+      </div>
+      <div class="form-group">
+        <label >Nombre Usuario</label>
+        <input type="text" class="form-control" placeholder="usuario" formControlName="username">
+      </div>
+      <div class="form-group">
+        <label >Password</label>
+        <input type="password" class="form-control" placeholder="Password" formControlName="password1">
+      </div>
+      <div class="form-group">
+        <label >Repetir Contraseña</label>
+        <input type="password" class="form-control" placeholder="Password 2" formControlName="password2">
+      </div>
+
+      <div class="form-group" >
+        <button type="button" class="btn btn-primary" (click)="agregarPasatiempos()" >Agregar Pasatiempos</button>
+      </div>
+
+
     <button type="submit" class="btn btn-primary" [disabled]="!forma.valid" >Guardar</button>
 
 
@@ -27,7 +49,11 @@
   <hr>
   <pre>
       {{ forma.valid | json}}
+      <br>
+      <pre>
+        {{ forma.status| json}}
 
+    </pre>
   </pre>
 
 
