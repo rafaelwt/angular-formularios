@@ -4,7 +4,9 @@
     <div class="form-group">
       <label >Nombre</label>
      <!--  [ngClass]="{ 'is-invalid': (!forma.get('nombre').valid && forma.get('nombre').touched) , 'is-valid': forma.get('nombre').valid}"   cuando no esta en un formGroupName-->
-      <input type="text" class="form-control"  placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': (!forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched) , 'is-valid': forma.controls['nombrecompleto'].controls['nombre'].valid}">
+      <input type="text" class="form-control"  placeholder="Nombre" formControlName="nombre"
+       [ngClass]="{ 'is-invalid': (!forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched) ,
+                   'is-valid': forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched}">
       <div class="invalid-feedback">
      <!--       <span *ngIf="forma.controls['nombre'].errors?.required">Este Campo es requerido</span> -->
           <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required">Este Campo es requerido</span>

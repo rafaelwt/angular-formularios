@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Observable} from 'rxjs/Observable';
 import { reject } from 'q';
 @Component({
@@ -18,10 +18,10 @@ export class DataComponent implements OnInit {
     password2: ''
 
   };
-  constructor() {
+  constructor(private fb: FormBuilder) {
 
     console.log('objeto', this.usuario);
-    this.forma = new FormGroup({
+    this.forma = this.fb.group({
 
       'nombrecompleto': new FormGroup({
         'nombre': new FormControl('', [Validators.required, Validators.minLength(3)]),
