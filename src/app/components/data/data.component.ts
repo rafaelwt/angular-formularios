@@ -44,16 +44,17 @@ export class DataComponent implements OnInit {
      this.forma.setValue(this.usuario);
 
      // Crear observador al formulario para detectar los cambios
-/*      this.forma.valueChanges.subscribe( data => {
-       console.log('Observable form', data);
-     }); */
+     this.forma.valueChanges.subscribe( data => {
+      // console.log('Observable form', data);
+       this.usuario = data;
+     });
      // Craer observedos de un solo control del formulario
      this.forma.controls['username'].valueChanges.subscribe( data => {
-      console.log('Observable Usurio:', data);
+       console.log('Observable Usurio:', data);
     });
     // Observar el status de un solo form control
     this.forma.controls['username'].statusChanges.subscribe( data => {
-      console.log('Observable Usuario statusChanges:', data);
+        console.log('Observable Usuario statusChanges:', data);
     });
 
 

@@ -1,62 +1,69 @@
 <h3> Formularios DATA</h3>
-<form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
-    <div formGroupName="nombrecompleto">
-    <div class="form-group">
-      <label >Nombre</label>
-     <!--  [ngClass]="{ 'is-invalid': (!forma.get('nombre').valid && forma.get('nombre').touched) , 'is-valid': forma.get('nombre').valid}"   cuando no esta en un formGroupName-->
-      <input type="text" class="form-control"  placeholder="Nombre" formControlName="nombre"
-       [ngClass]="{ 'is-invalid': (!forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched) ,
-                   'is-valid': forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched}">
-      <div class="invalid-feedback">
-     <!--       <span *ngIf="forma.controls['nombre'].errors?.required">Este Campo es requerido</span> -->
-          <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required">Este Campo es requerido</span>
-          <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength">Necesita al menos 5  caracteres</span>
-         </div>
-    </div>
-    <div class="form-group">
-        <label >Apellido</label>
-        <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
-      </div>
-    </div>
-    <div class="form-group">
-        <label >Correo </label>
-        <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Correo Electronico" formControlName="correo">
-      </div>
-      <div class="form-group" formArrayName="pasatiempos">
-        <label >Pasatiempos</label>
-        <input *ngFor="let pasatiempo of forma.controls['pasatiempos'].controls; let i = index" type="text" class="form-control" placeholder="Pasatiempos" [formControlName]="i">
+
+<div class="row">
+  <div class="col-md-6">
+    <form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
+      <div formGroupName="nombrecompleto">
+      <div class="form-group">
+        <label >Nombre</label>
+       <!--  [ngClass]="{ 'is-invalid': (!forma.get('nombre').valid && forma.get('nombre').touched) , 'is-valid': forma.get('nombre').valid}"   cuando no esta en un formGroupName-->
+        <input type="text" class="form-control"  placeholder="Nombre" formControlName="nombre"
+         [ngClass]="{ 'is-invalid': (!forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched) ,
+                     'is-valid': forma.controls['nombrecompleto'].controls['nombre'].valid && forma.controls['nombrecompleto'].controls['nombre'].touched}">
+        <div class="invalid-feedback">
+       <!--       <span *ngIf="forma.controls['nombre'].errors?.required">Este Campo es requerido</span> -->
+            <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required">Este Campo es requerido</span>
+            <span *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength">Necesita al menos 5  caracteres</span>
+           </div>
       </div>
       <div class="form-group">
-        <label >Nombre Usuario</label>
-        <input type="text" class="form-control" placeholder="usuario" formControlName="username">
+          <label >Apellido</label>
+          <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
+        </div>
       </div>
       <div class="form-group">
-        <label >Password</label>
-        <input type="password" class="form-control" placeholder="Password" formControlName="password1">
-      </div>
-      <div class="form-group">
-        <label >Repetir Contraseña</label>
-        <input type="password" class="form-control" placeholder="Password 2" formControlName="password2">
-      </div>
+          <label >Correo </label>
+          <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Correo Electronico" formControlName="correo">
+        </div>
+        <div class="form-group" formArrayName="pasatiempos">
+          <label >Pasatiempos</label>
+          <input *ngFor="let pasatiempo of forma.controls['pasatiempos'].controls; let i = index" type="text" class="form-control" placeholder="Pasatiempos" [formControlName]="i">
+        </div>
+        <div class="form-group">
+          <label >Nombre Usuario</label>
+          <input type="text" class="form-control" placeholder="usuario" formControlName="username">
+        </div>
+        <div class="form-group">
+          <label >Password</label>
+          <input type="password" class="form-control" placeholder="Password" formControlName="password1">
+        </div>
+        <div class="form-group">
+          <label >Repetir Contraseña</label>
+          <input type="password" class="form-control" placeholder="Password 2" formControlName="password2">
+        </div>
 
-      <div class="form-group" >
-        <button type="button" class="btn btn-primary" (click)="agregarPasatiempos()" >Agregar Pasatiempos</button>
-      </div>
+        <div class="form-group" >
+          <button type="button" class="btn btn-primary" (click)="agregarPasatiempos()" >Agregar Pasatiempos</button>
+        </div>
 
 
-    <button type="submit" class="btn btn-primary" [disabled]="!forma.valid" >Guardar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!forma.valid" >Guardar</button>
 
 
-  </form>
-  <hr>
-  <pre>
-      {{ forma.valid | json}}
-      <br>
-      <pre>
-        {{ forma.status| json}}
+    </form>
+    <hr>
+    <pre>
+        {{ forma.valid | json}}
+        <br>
+        <pre>
+          {{ forma.status| json}}
 
+      </pre>
     </pre>
-  </pre>
-
+  </div>
+  <div class="col-md-6">
+    <pre> {{ usuario | json }} </pre>
+  </div>
+</div>
 
 
